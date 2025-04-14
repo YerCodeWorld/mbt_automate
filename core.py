@@ -5,151 +5,124 @@ THen, we want to change the data to delete unnecessary information. Arrivals and
 These processes must be done for each company and return all the data in a single text
 """
 
+from core_utils import *
 from utils import *
 import os
 
+# TODO: Implement getting this info from JSON file
 path = os.path.expanduser("~/Desktop")
-with open(f"{path}/TODAY.csv", "r") as file:
-    DATA = file.read()
+file = "TODAY.csv"
 
 # TODO: create these dynamically
 AVAILABLE_COMMANDS = {
     "atd": ("AT", "AT_departures"),
     "ata": ("AT", "AT_arrivals"),
-    "atdn": ("AT", "AT_departures"),
-    "atan": ("AT", "AT_arrivals"),
-
     "std": ("ST", "ST_departures"),
     "sta": ("ST", "ST_arrivals"),
-    "stdn": ("ST", "ST_departures"),
-    "stan": ("ST", "ST_arrivals"),
-
     "mbtd": ("MBT", "MBT_departures"),
     "mbta": ("MBT", "MBT_arrivals"),
-    "mbtdn": ("MBT", "MBT_departures"),
-    "mbtan": ("MBT", "MBT_arrivals"),
 
-    "help": get_commands
+    "help": ("", ""),
+    "exit": ("", ""),
+    "names": ("", ""),
+    "pdfs": ("", ""),
+    "write": ("", ""),
+    "config": ("", "")   # Use this to change the configuration from the JSON file when we implement it
 }
-UNWANTED_ARRIVALS_INDEXES = [0, 1, 5, 7, 9, 10, 11, 12]
-UNWANTED_DEPARTURES_INDEXES =  [0, 1, 5, 8, 9, 10, 11, 12]
-HEADER = []
-ARRIVALS_HEADER = "name,time,flight,pax,hotel"
-DEPARTURES_HEADER = "name,time,pax,hotel"
+
+ACTIONS = {
+    "pdfs": lambda a,b, c: create_pdfs(a, b, c),
+    "names": lambda a: print(get_names(a)) ,
+    "write": lambda a, b, c, d: write_to_directory(a, b, c, d),
+    "help": lambda a, b: print(print_help(a, b))
+}
 
 HEADER_TYPE = {
-    "a": ARRIVALS_HEADER,
-    "d": DEPARTURES_HEADER
-}
-IGNORE_MODE_TYPE = {
-    "arrival": UNWANTED_ARRIVALS_INDEXES,
-    "departure": UNWANTED_DEPARTURES_INDEXES
+    "a": "name,time,flight,pax,hotel",
+    "d": "name,time,pax,hotel"
 }
 
-def split_by_company(data: str) -> [[]]:
+VALID_DATA = {
+    "arrival": list[int],
+    "departure": list[int],
+    "company": int
+}
+
+HEADER = list[str]
+
+# STEP 1: remove the header of the csv file extracted from a google sheets file.
+# STEP 1: our files have an empty line to separate companies. we will use that to split the data
+def company_split(data: str) -> [[]]:
     global HEADER
-    # This is the regular amount of commas from the csv
-    header, removed_header = get_columns(data)
-    HEADER = header
-    return removed_header.strip().split(",,,,,,,,,,,")
+    # First remove the header and get information from it like the length  to get the amount of columns
+    header_data, sliced_data = get_columns(data)
+    HEADER = header_data[1]
+    return sliced_data.strip().split(","*header_data[0])
 
-def determine_company(data: []) -> (str, [str]):
-    # take one string row - to check for the company (SINCE THAT SPECIFIC INDEX TELLS US THE TYPE OF SERVICE)
-    get_company_type: str = data.strip().split("\n")[0]
-    get_company_data: str = data.strip().split("\n")
+# STEP 2: now we want to separate the data in arrivals / departures from each data bucket
+def organize_by_type(data: [[]], company_index: int, valid_data=None):
+    if valid_data is None:
+        valid_data = VALID_DATA
 
-    # THE INFORMATION IS AT INDEX 9, THE COLUM WHICH CONTAINS THE COMPANY
-    return get_company_type.split(",")[9], get_company_data  # I made sure this was the correct index
+    result = {}
+    for i, bucket in enumerate(data):
 
-def separate_by_type_of_service(data, mode: IGNORE_MODE_TYPE) -> ([], []):
-
-    formatted_list = []
-    for index, l in enumerate(data):
-        if index not in mode:
-            formatted_list.append(l)
-    return formatted_list
-
-def format_data(data: {}):
-
-    formatted_arrivals = []
-    formatted_departures = []
-    # for string row in data from the company
-    for dt in data:
-
-        t = dt[0]  # type
-        d = dt.split(",")  # split string row
-
-        if t == "D":
-            formatted_departures.append(",".join(separate_by_type_of_service(d, IGNORE_MODE_TYPE["departure"])))
-        if t == "A":
-            formatted_arrivals.append(",".join(separate_by_type_of_service(d, IGNORE_MODE_TYPE["arrival"])))
-
-    return "\n".join(formatted_arrivals), "\n".join(formatted_departures)
-
-def split_by_type(data: [[]]):
-
-    tree = {}  # We will return this object
-
-    # The company is a list of lists, so we take out each one and then work on them individually
-    for i, company in enumerate(data):
-        # We would need to know what company we are working for. The information is in each row so
-        # we are just sending the data to check one of them and get the index which has the information
-        # returning the company we get as well as the whole list of rows
-        cmp, cmp_data = determine_company(company)
-        a, d = format_data(cmp_data)   # Arrivals, departures
-        tree[cmp] = {
+        company_name, company_data = get_company(bucket, company_index)
+        arrivals, departures = get_services(company_data, valid_data)
+        result[company_name] = {
             # Now we will divide departures and arrivals from each company
-            f"{cmp}_arrivals": a,
-            f"{cmp}_departures": d
+            f"{company_name}_arrivals": arrivals,
+            f"{company_name}_departures": departures
         }
+    return result
 
-    return tree
 
 # TODO: PLEASE REFACTOR
-def program(result):
+def program(data):
 
     while True:
         command = input("Enter your command: ").lower().strip()
-        if "write" in command:
+        if len(command.split(" ")) > 1:
+            command = command.lower().split(" ")
 
-            try:
-                data_to_write = command.split(" ")
-                if len(data_to_write) > 1:
-                    cmp = AVAILABLE_COMMANDS[data_to_write[1]]
-                    hd_type = command[-1]
-                    write_to_directory(path, f"{data_to_write[1]}", result[cmp[0]][cmp[1]], HEADER_TYPE[hd_type])
-                else:
-                    print("write what? ")
-            except Exception as err:
-                print("Here: ", err)
-
-            continue
         try:
+            if command[0] in ACTIONS.keys():
+                cmds = AVAILABLE_COMMANDS[command[1]]
+                if command[0] == "pdfs":
+                    ACTIONS[command[0]](data, AVAILABLE_COMMANDS[command[1]], path)
+                elif command[0] == "names":
+                    ACTIONS[command[0]](data[cmds[0]][cmds[1]])
+                elif command[0] == "write":
+                    hd_type = command[1][-1]
+                    ACTIONS[command[0]](path, f"{command[1]}", data[cmds[0]][cmds[1]], HEADER_TYPE[hd_type])
+                elif command[0] == "help":
+                    ACTIONS[command[0]](command[1], AVAILABLE_COMMANDS)
+                continue
+
             if command == "exit":
                 break
-
-            elif command == "help":
-                print_help(command, AVAILABLE_COMMANDS)
-
-            elif command[len(command)-1] == "n":
-                cmd = AVAILABLE_COMMANDS[command]
-                print(get_names(result[cmd[0]][cmd[1]]))
             else:
                 cmp = AVAILABLE_COMMANDS[command]
-                # print(cmp[0]) leaving here for example
-                print(result[cmp[0]][cmp[1]])
-
-        # Nice solution
+                print(data[cmp[0]][cmp[1]])
         except KeyError:
             print("Could not get information for that company")
 
 def main():
-    # We have to split the data in a list, in order to separate it by company
-    data_after_split = split_by_company(DATA)  # works
-    # Then we will simply create an object with all the companies as keys, and a dictionary (arrivals | departures)
-    # as the values. This lists will also go through a refactoring process to remove unnecessary information
-    # according to its type
-    result = split_by_type(data_after_split)  # work
+    global VALID_DATA
+
+    # STEP 0
+    with open(f"{path}/{file}", "r") as fl:
+        data = fl.read()
+    # Step 1
+    data_buckets = company_split(data)
+    # Step 2
+    VALID_DATA = get_valid_indexes(HEADER)
+    # Step 3
+    result = organize_by_type(data_buckets, VALID_DATA["company"])  # work
+
     program(result)
 
+
+# TODO: Create starter interface in which we have commands like start, help, and global interest functions in general
+# This would allow to reuse the program as many times as we would like to
 main()
