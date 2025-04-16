@@ -1,4 +1,7 @@
 {
   "defaultDir": "~/Desktop",
-  "defaultFile": "TODAY.csv"
+  "defaultFile": "TODAY.csv",
+  "edgeCases": [],
+  "exportDirs": [],
+  "exportFiles": []
 }

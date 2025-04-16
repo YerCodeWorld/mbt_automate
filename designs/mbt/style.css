@@ -1,0 +1,239 @@
+
+@page {
+    size: 25cm 19.5cm; /* Reduced height */
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Shrikhand';
+    src: url('../fonts/Shrikhand-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFE;
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+.voucher-container {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Changed from 100vh */
+    max-height: 775px; /* Added max-height */
+    background-color: #FFFFFE;
+    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.corner-top-right {
+    position: absolute;
+    right: 0;
+    bottom: 55px;
+    margin-bottom: 280px;
+    z-index: 1;
+    width: 22%; /* Reduced corner size */
+}
+
+.corner-top-right img {
+    width: 100%;
+    height: auto;
+}
+
+.corner-bottom-left {
+    position: absolute;
+    top: 350px;  /* Only way I found of getting it stick to the bottom */
+    left: 0;
+    z-index: 1;
+    width: 22%;
+}
+
+.corner-bottom-left img {
+    width: 100%;
+    height: auto;
+}
+
+.wave-bg {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    z-index: 0;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-img {
+    width: 300px; /* Further reduced */
+    height: 80px; /* Further reduced */
+    margin-top: 30px;
+    margin-bottom: 40px;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 5px;
+    margin: 40px; /* Reduced */
+}
+
+.first-name {
+    font-family: 'Shrikhand', cursive;
+    font-size: 110px; /* Reduced */
+    font-weight: 800;
+    -webkit-text-stroke: 1px #0B406C;
+    text-stroke: 12px #001f3f;
+    color: #0B406C;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: 1px;
+    margin: 15px; /* Reduced */
+    padding: 0;
+}
+
+.last-name {
+    font-family: 'Shrikhand', cursive;
+    font-size: 110px; /* Reduced */
+    font-weight: 800;
+    -webkit-text-stroke: 1px #0B406C;
+    text-stroke: 12px #001f3f;
+    color: #0B406C;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: 1px;
+
+    margin: 15px; /* Reduced */
+    padding: 0;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px; /* Reduced */
+    position: relative;
+    margin-top: 40px;
+    margin-left: 10px;
+    z-index: 2;
+}
+
+.left-info {
+    width: 42%;
+    padding: 30px;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    visibility: hidden;
+}
+
+.id-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.id-text {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+    color: #333;
+}
+
+.right-info {
+    position: relative;
+    width: 55%; /* Increased */
+    background-color: #DBEEFE;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    max-height: 70px;
+}
+
+.info-details {
+    flex: 1;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 4px;
+    align-items: center;
+}
+
+.info-label {
+    width: 15%; /* Increased */
+    min-width: 70px; /* Added minimum width */
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.info-value {
+    width: 75%; /* Adjusted */
+    font-size: 16px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.arrival-container {
+    position: absolute; /* Changed to absolute */
+    top: 65px;
+    right: 0px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0; /* Removed margin */
+}
+
+.clock-icon {
+    width: 120px; /* Reduced */
+    height: auto;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    .voucher-container {
+        page-break-inside: avoid;
+        height: 100%;
+    }
+
+    /* Force background colors to print */
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

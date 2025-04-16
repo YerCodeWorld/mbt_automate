@@ -31,7 +31,7 @@ AVAILABLE_COMMANDS = {
 }
 
 ACTIONS = {
-    "pdfs": lambda a,b, c: create_pdfs(a, b, c),
+    "pdfs": lambda a,b,c,d: create_pdfs(a, b, c, d),
     "names": lambda a: print(get_names(a)) ,
     "write": lambda a, b, c, d: write_to_directory(a, b, c, d),
     "help": lambda a, b: print(print_help(a, b))
@@ -57,7 +57,8 @@ def company_split(data: str) -> [[]]:
     # First remove the header and get information from it like the length  to get the amount of columns
     header_data, sliced_data = get_columns(data)
     HEADER = header_data[1]
-    return sliced_data.strip().split(","*header_data[0])
+    # print(len(","*header_data[0]) == len(",,,,,,,,,,,"))
+    return sliced_data.strip().split(",,,,,,,,,,,")
 
 # STEP 2: now we want to separate the data in arrivals / departures from each data bucket
 def organize_by_type(data: [[]], company_index: int, valid_data=None):
@@ -76,12 +77,10 @@ def organize_by_type(data: [[]], company_index: int, valid_data=None):
         }
     return result
 
-
-# TODO: PLEASE REFACTOR
 def program(data):
 
     while True:
-        command = input("Enter your command: ").lower().strip()
+        command = input("\033[34mEnter your command:\033[0m").lower().strip()
         if len(command.split(" ")) > 1:
             command = command.lower().split(" ")
 
@@ -89,7 +88,7 @@ def program(data):
             if command[0] in ACTIONS.keys():
                 cmds = AVAILABLE_COMMANDS[command[1]]
                 if command[0] == "pdfs":
-                    ACTIONS[command[0]](data, AVAILABLE_COMMANDS[command[1]], path)
+                    ACTIONS[command[0]](data, AVAILABLE_COMMANDS[command[1]], command[1], path)
                 elif command[0] == "names":
                     ACTIONS[command[0]](data[cmds[0]][cmds[1]])
                 elif command[0] == "write":
@@ -105,7 +104,7 @@ def program(data):
                 cmp = AVAILABLE_COMMANDS[command]
                 print(data[cmp[0]][cmp[1]])
         except KeyError:
-            print("Could not get information for that company")
+            colored_print("Could not get information for that company", "yellow")
 
 def main():
     global VALID_DATA

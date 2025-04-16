@@ -1,5 +1,16 @@
 from pypdf import PdfReader, PdfWriter
 
+# I could use the console purely on white but meh I like this better
+def colored_print(message: str, color):
+    colors = {
+        "red": 30,
+        "green": 32,
+        "yellow": 33,
+        "blue": 34
+    }
+    print(f"\033[{colors[color]}m{message}\033[0m")
+
+# No idea why if im the only one using this thing but ok
 def print_help(command, available_commands):
     print("Available Commands: ")
     print("The first two digits stand for the company.\na: arrival\nd: departure\nn: names\n")
@@ -25,20 +36,28 @@ def write_to_directory(path: str, file: str, content: str, header: str):
 
     with open(f"{path}/{file}.csv", 'w') as fl:
         fl.write(f"{header}\n" + content)
-    print("operation completed")
+    colored_print("operation completed", "green")
 
 
 # EXTRA STEP: create pdfs. USED WHEN PDFS COMMAND IS TYPED ON
-def create_pdfs(data, command, path):
+def create_pdfs(data, command, split_file: str, path):
     names = get_names(data[command[0]][command[1]])
-    reader = PdfReader(f"{path}/TO_SPLIT.pdf")
+
+    try:
+        reader = PdfReader(f"{path}/{split_file.upper()}_SPLIT.pdf")  # this is the way I save my files. command + split suffix
+    except FileNotFoundError as e:
+        return colored_print(f"YO! , {e}", "red")
 
     if len(reader.pages) > len(names):
-        return print("ERROR: Zero correlation between the pdf length and the available names. are you sure you are using the correct pdf?")
+        return colored_print(
+                "ERROR: Zero correlation between the pdf length and the available names. "
+                "are you sure you are using the correct pdf?",
+                "red"
+            )
 
     for i in range(len(reader.pages)):
         writer = PdfWriter()
         writer.add_page(reader.pages[i])
         with open(f"{path}/{names[i]} - {command[0]}.pdf", "wb") as output_file:
             writer.write(output_file)
-        print("Operation completed")
+        colored_print("Operation Completed! ", "green")
