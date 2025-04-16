@@ -97,6 +97,18 @@ body, html {
     align-items: center;
 }
 
+.logo-st {
+    width: 300px; /* Further reduced */
+    height: 120px; /* Further reduced */
+    margin-top: 30px;
+    margin-bottom: 40px;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .name-container {
     text-align: center;
     position: relative;
@@ -129,7 +141,6 @@ body, html {
     text-transform: uppercase;
     line-height: 0.9;
     letter-spacing: 1px;
-
     margin: 15px; /* Reduced */
     padding: 0;
 }
@@ -139,44 +150,35 @@ body, html {
     justify-content: space-between;
     padding: 0 60px; /* Reduced */
     position: relative;
-    margin-top: 40px;
     margin-left: 10px;
     z-index: 2;
 }
 
 .left-info {
-    width: 42%;
-    padding: 30px;
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
+    left: 40px;
+    width: 45%;
+    max-height: 20px;
     visibility: hidden;
 }
 
-.id-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #003366;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.id-text {
-    font-size: 14px;
-    line-height: 1.6;
-    text-align: justify;
-    color: #333;
+.id-st {
+    height: 75%;
+    width: 80%;
+    margin-left: 70px;
+    margin-top: 30px;
 }
 
 .right-info {
     position: relative;
-    width: 55%; /* Increased */
+    width: 45%; /* Increased */
     background-color: #DBEEFE;
     border-radius: 10px;
-    padding: 20px;
-    margin-top: 60px;
+    padding: 10px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    max-height: 70px;
+    min-height: 40px;
+    max-height: 130px;
 }
 
 .info-details {
@@ -190,16 +192,17 @@ body, html {
 }
 
 .info-label {
-    width: 15%; /* Increased */
+    width: 25%; /* Increased */
     min-width: 70px; /* Added minimum width */
     font-weight: 900;
     font-size: 16px;
+    letter-spacing: 1px;
 }
 
 .info-value {
     width: 75%; /* Adjusted */
     font-size: 16px;
-
+    letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -207,7 +210,7 @@ body, html {
 
 .arrival-container {
     position: absolute; /* Changed to absolute */
-    top: 65px;
+    top: 55px;
     right: 0px;
     display: flex;
     justify-content: flex-end;

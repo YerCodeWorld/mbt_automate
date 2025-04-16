@@ -3,5 +3,23 @@
   "defaultFile": "TODAY.csv",
   "edgeCases": [],
   "exportDirs": [],
-  "exportFiles": []
+  "exportFiles": [],
+
+  "interface": {
+    "commands": {
+      "ata": [],
+      "atd": [],
+      "sta": [],
+      "std": [],
+      "mbta": [],
+      "mbtd": []
+    },
+    "controls": {
+      "names": "",
+      "pdfs": "",
+      "flightCheck": "",
+      "write": "",
+      "read": ""
+    }
+  }
 }

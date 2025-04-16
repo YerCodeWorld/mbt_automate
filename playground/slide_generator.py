@@ -1,8 +1,11 @@
+import datetime
+
 from weasyprint import HTML
 import base64
 
 with open("../style.css", "r") as fl:
-    styles = fl.read()
+    fl = fl.read().replace("hidden;", "visible;")
+    styles = fl
 
 def functional_design(name, hotel, pax, flight, time, date):
     # Load images as base64 to embed directly in HTML
@@ -19,6 +22,15 @@ def functional_design(name, hotel, pax, flight, time, date):
         logo_base64 = image_to_base64("../images/LOGO.png")
         logo_img = f'<img class="logo-img" src="data:image/png;base64,{logo_base64}"/>'
 
+        departure_base64 = image_to_base64("../images/SALIDA.png")
+        departure_img = f'<img class="clock-icon" src="data:image/png;base64,{departure_base64}"/>'
+
+        st_base64 = image_to_base64("../images/ST_LOGO.png")
+        st_img = f'<img class="logo-st" src="data:image/png;base64,{st_base64}">'
+
+        id_base64 = image_to_base64("../images/ID.png")
+        id_img = f'<img class="id-st" src="data:image/png;base64,{id_base64}">'
+
         template_base64 = image_to_base64("../images/BG.png")
         bg_img = f'<img class="wave-bg" src="data:image/png;base64,{template_base64}"/>'
 
@@ -34,106 +46,103 @@ def functional_design(name, hotel, pax, flight, time, date):
         return "Could not get some files to complete the operation"
 
     design = f"""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacbé Transfers - Franco Barrios</title>
-    <style>
-    {styles}
-    </style>
-</head>
-<body>
-    <div class="voucher-container">
-
-        <div class="corner-top-right" >
-            {top_img}
-        </div>
-
-        <div class="corner-bottom-left" >
-            {bottom_img}
-        </div>
-
-        <div>
-            {bg_img}
-        </div>
-
-        <div class="logo-container">
-            <div class="logo">
-                {logo_img}
-            </div>
-        </div>
-
-        <div class="name-container">
-            <h1 class="first-name">{name[0]}</h1>
-            <h1 class="last-name">{name[1]}</h1>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="info-container">
-            <div class="left-info">
-                <div class="id-title">YOUR ID</div>
-                <div class="id-text">
-                    To ensure the safety and quality of our service, we
-                    kindly request a photo of your identification along
-                    with your service sign. This information will be used
-                    exclusively for security purposes and will not be
-                    shared under any circumstances. We appreciate
-                    your understanding and cooperation.
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Sacbé Transfers - Franco Barrios</title>
+            <style>
+            {styles}
+            </style>
+        </head>
+        <body>
+            <div class="voucher-container">
+        
+                <div class="corner-top-right" >
+                    {top_img}
                 </div>
-            </div>
-
-            <div class="right-info">
-                <div class="info-details">
-                    <div class="info-row">
-                        <div class="info-label">HOTEL:</div>
-                        <div class="info-value">{hotel}</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">PAX:</div>
-                        <div class="info-value">{pax}</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">HOUR:</div>
-                        <div class="info-value">{time}</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">FLIGHT:</div>
-                        <div class="info-value">{flight}</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">DATE:</div>
-                        <div class="info-value">{date}</div>
+        
+                <div class="corner-bottom-left" >
+                    {bottom_img}
+                </div>
+        
+                <div>
+                    {bg_img}
+                </div>
+        
+                <div class="logo-container">
+                    <div class="logo">
+                        {st_img}
                     </div>
                 </div>
-                <div class="arrival-container">
-                    {service_img}
+        
+                <div class="name-container">
+                    <h1 class="first-name">{name[0]}</h1>
+                    <h1 class="last-name">{name[1]}</h1>
+                </div>
+        
+                <div class="divider"></div>
+        
+                <div class="info-container">
+                    <div class="left-info">
+                       {id_img}
+                    </div>
+        
+                    <div class="right-info">
+                        <div class="info-details">
+                            <div class="info-row">
+                                <div class="info-label">HOTEL:</div>
+                                <div class="info-value">{hotel}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">PAX:</div>
+                                <div class="info-value">{pax}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">HOUR:</div>
+                                <div class="info-value">{time}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">FLIGHT:</div>
+                                <div class="info-value">{flight}</div>
+                            </div>
+                            <div class="info-row">
+                                <div class="info-label">DATE:</div>
+                                <div class="info-value">{date}</div>
+                            </div>
+                        </div>
+                        <div class="arrival-container">
+                            {service_img}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
-</html>
-"""
+        </body>
+        </html>
+        """
     return design
 
 def create_slides():
-    slides = {
-        "slide1": ["Yahir Beras", "My House", "04", "HELICOPTER 7", "03:57 pm", "15/04/25"],
-        "slide2": ["Yuleisi Heredia", "Our house", "03", "AIRPLANE 7", "03:59 pm", "15/04/25"]
-    }
+    slides = """
+    Mustafa Khan,11:42 pm,DM 5805,8,Playa Coral B11
+    GUILLERMO Rosco,02:00 pm,UA 2122,03,Ocean Blue & Sand
+    Luigi Mendez,12:36 pm,B6 1077,02,Secrets Royal Beach PUJ
+    """
 
-    for slide in slides.keys():
-        info = slides[slide]
-        name = info[0]
-        hotel = info[1]
-        pax = info[2]
-        flight = info[3]
-        time = info[4]
-        date = info[5]
+    slides = slides.strip().split("\n")
 
-        HTML(string=functional_design(name.split(" "), hotel, pax, flight, time, date), base_url=".").write_pdf(f"{slide}.pdf")
+    for slide in slides:
+        slide = slide.split(",")
+
+        name = slide[0].upper()
+        time = slide[1].upper()
+        flight = slide[2].upper()
+        pax = slide[3].upper()
+        hotel = slide[4].upper()
+        date = str(datetime.datetime.today()).split()[0]
+
+        HTML(string=functional_design(name.strip().split(" "), hotel, pax, flight, time, date), base_url=".").write_pdf(f"{name.strip()}.pdf")
+
 
 create_slides()
