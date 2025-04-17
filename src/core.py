@@ -7,6 +7,8 @@ These processes must be done for each company and return all the data in a singl
 
 from extended import *
 from utils import *
+from slide_generator import create_slides as slides
+from flights import api as flight_check
 import os
 
 # TODO: Implement getting this info from JSON file
@@ -25,6 +27,7 @@ AVAILABLE_COMMANDS = {
     "help": ("", ""),
     "exit": ("", ""),
     "flights": ("", ""),
+    "checkfl": ("",""),
     "names": ("", ""),
     "pdfs": ("", ""),
     "write": ("", ""),
@@ -33,8 +36,10 @@ AVAILABLE_COMMANDS = {
 
 ACTIONS = {
     "pdfs": lambda a,b,c,d: create_pdfs(a, b, c, d),
-    "names": lambda a: print(get_names(a)) ,
+    "create": lambda a, b, c: slides(a, b, c),
+    "names": lambda a: print(get_names(a)),
     "flights": lambda a: print(get_flights(a)),
+    "checkfl": lambda a: print(flight_check(get_flights(a))),
     "write": lambda a, b, c, d: write_to_directory(a, b, c, d),
     "help": lambda a, b: print(print_help(a, b))
 }
@@ -89,6 +94,7 @@ def program(data):
 
         try:
             if command[0] in ACTIONS.keys():
+
                 cmds = AVAILABLE_COMMANDS[command[1]]
                 c = command[0]
 
@@ -96,6 +102,13 @@ def program(data):
                     ACTIONS[c](data, AVAILABLE_COMMANDS[command[1]], command[1], path)
                 elif c == "names":
                     ACTIONS[c](data[cmds[0]][cmds[1]])
+                elif c == "create":
+                    ACTIONS[c](data[cmds[0]][cmds[1]], cmds[0], command[1][-1])
+                elif c == "checkfl":
+                    if not command[1][-1] == "d":
+                        ACTIONS[c](data[cmds[0]][cmds[1]])
+                    else:
+                        colored_print("Departures do not provide flights we need to check on.", "yellow")
                 elif c == "flights":
                     if not command[1][-1] == "d":
                         ACTIONS[c](data[cmds[0]][cmds[1]])
@@ -113,6 +126,7 @@ def program(data):
             else:
                 cmp = AVAILABLE_COMMANDS[command]
                 print(data[cmp[0]][cmp[1]])
+
         except KeyError:
             colored_print("Could not get information for that company", "yellow")
 

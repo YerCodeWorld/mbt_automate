@@ -137,7 +137,9 @@ def get_flight_time(code: str, date="tomorrow"):
     data = get_flight_data(convert_flight_code(code), date)
     return process_flight_data(data, code)
 
-flights = []
-for flight in flights:
-    print(f"Got flight {flight}:", get_flight_time(flight))
+def api(data):
+    flights = data
+    for flight in flights:
+        print(f"Got flight {flight}:", get_flight_time(flight))
+    print("Done my broda")
 

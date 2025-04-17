@@ -1,7 +1,10 @@
 import datetime
-
+import os
 from weasyprint import HTML
 import base64
+
+path = os.path.expanduser("~/Desktop")
+file = "TODAY.csv"
 
 # Load images as base64 to embed directly in HTML
 def image_to_base64(image_path):
@@ -142,10 +145,14 @@ def create_slides(data, company, service):
 
         name = slide[0].upper()
         time = slide[1].upper()
+        # For we will keep checking the flights manually and introducing them here as hard coded values
         # flight = slide[2].upper()
         pax = slide[2].upper()
         hotel = slide[3].upper()
         date = str(datetime.datetime.today()).split()[0]
-
-        HTML(string=functional_design(name.strip().split(" "), hotel, pax, time, date, company=company, service=service), base_url=path).write_pdf(f"{name.strip()} - {company.upper()}.pdf")
-        print("Done! ")
+        # might also add logic to delete the current files in the directory
+        output_dir = f"{path}/OPERATIONS/{company.upper()+service.upper()}/{name.strip()} - {company.upper()}.pdf"
+        HTML(
+            string=functional_design(
+                name.strip().split(" "), hotel, pax, time, date, company=company.lower(), service=service.lower()), base_url="."
+        ).write_pdf(output_dir)
