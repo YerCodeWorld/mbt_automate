@@ -1,3 +1,6 @@
+::root{
+    --flight-row-visibility: flex;
+}
 
 @page {
     size: 25cm 19.5cm; /* Reduced height */
@@ -35,8 +38,7 @@ body, html {
 .corner-top-right {
     position: absolute;
     right: 0;
-    bottom: 55px;
-    margin-bottom: 280px;
+    bottom: 50%;
     z-index: 1;
     width: 22%; /* Reduced corner size */
 }
@@ -48,7 +50,7 @@ body, html {
 
 .corner-bottom-left {
     position: absolute;
-    top: 350px;  /* Only way I found of getting it stick to the bottom */
+    top: 51%;  /* Only way I found of getting it stick to the bottom */
     left: 0;
     z-index: 1;
     width: 22%;
@@ -61,7 +63,7 @@ body, html {
 
 .wave-bg {
     position: absolute;
-    top: 55%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -86,10 +88,9 @@ body, html {
 }
 
 .logo-img {
-    width: 300px; /* Further reduced */
-    height: 80px; /* Further reduced */
-    margin-top: 30px;
-    margin-bottom: 40px;
+    width: 340px; /* Further reduced */
+    height: 200px; /* Further reduced */
+    margin-bottom: 10px;
     background-color: transparent;
     position: relative;
     display: flex;
@@ -98,10 +99,11 @@ body, html {
 }
 
 .logo-st {
-    width: 300px; /* Further reduced */
-    height: 120px; /* Further reduced */
-    margin-top: 30px;
-    margin-bottom: 40px;
+    width: 340px; /* Further reduced */
+    height: 140px; /* Further reduced */
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 50px;
     background-color: transparent;
     position: relative;
     display: flex;
@@ -114,7 +116,7 @@ body, html {
     position: relative;
     z-index: 2;
     padding: 5px;
-    margin: 40px; /* Reduced */
+    margin: 20px; /* Reduced */
 }
 
 .first-name {
@@ -127,7 +129,7 @@ body, html {
     text-transform: uppercase;
     line-height: 0.9;
     letter-spacing: 1px;
-    margin: 15px; /* Reduced */
+    margin: 0;
     padding: 0;
 }
 
@@ -141,22 +143,23 @@ body, html {
     text-transform: uppercase;
     line-height: 0.9;
     letter-spacing: 1px;
-    margin: 15px; /* Reduced */
+    margin: 0;
     padding: 0;
 }
 
 .info-container {
     display: flex;
     justify-content: space-between;
+    align-self: bottom;
     padding: 0 60px; /* Reduced */
     position: relative;
-    margin-left: 10px;
+    margin-top: 100px;
     z-index: 2;
 }
 
 .left-info {
-    left: 40px;
-    width: 45%;
+    margin-left: 15px;
+    width: 43%;
     max-height: 20px;
     visibility: hidden;
 }
@@ -187,6 +190,12 @@ body, html {
 
 .info-row {
     display: flex;
+    margin-bottom: 4px;
+    align-items: center;
+}
+
+.info-row-flight {
+    display: flex;  /*collapse*/
     margin-bottom: 4px;
     align-items: center;
 }

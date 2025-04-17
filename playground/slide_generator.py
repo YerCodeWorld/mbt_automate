@@ -3,47 +3,57 @@ import datetime
 from weasyprint import HTML
 import base64
 
-with open("../style.css", "r") as fl:
-    fl = fl.read().replace("hidden;", "visible;")
+# Load images as base64 to embed directly in HTML
+def image_to_base64(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode('utf-8')
+    except FileNotFoundError:
+        print(f"Warning: Image file {image_path} not found.")
+        return ""
+
+try:
+    logo_base64 = image_to_base64("../images/LOGO.png")
+    logo_img = f'<img class="logo-img" src="data:image/png;base64,{logo_base64}"/>'
+
+    departure_base64 = image_to_base64("../images/SALIDA.png")
+    departure_img = f'<img class="clock-icon" src="data:image/png;base64,{departure_base64}"/>'
+
+    st_base64 = image_to_base64("../images/ST_LOGO.png")
+    st_img = f'<img class="logo-st" src="data:image/png;base64,{st_base64}">'
+
+    id_base64 = image_to_base64("../images/ID.png")
+    id_img = f'<img class="id-st" src="data:image/png;base64,{id_base64}">'
+
+    template_base64 = image_to_base64("../images/BG.png")
+    bg_img = f'<img class="wave-bg" src="data:image/png;base64,{template_base64}"/>'
+
+    service_base64 = image_to_base64("../images/LLEGADA.png")
+    service_img = f'<img class="clock-icon" src="data:image/png;base64,{service_base64}"/>'
+
+    top_base64 = image_to_base64("../images/TOP_RIGHT.png")
+    top_img = f'<img class="logo-img" src="data:image/png;base64,{top_base64}"/>'
+
+    bottom_base64 = image_to_base64("../images/BOTTOM_LEFT.png")
+    bottom_img = f'<img class="logo-img" src="data:image/png;base64,{bottom_base64}"/>'
+except FileNotFoundError:
+    print("Could not get some files to complete the operation")
+
+def functional_design(name, hotel, pax, flight, time, date, company="at", service="a"):
+    # Change logo depending on type.
+    # Simply toggle visibility for the id variation. .
+    with open("../style.css", "r") as fl:
+        fl = fl.read()
+        if service == "d":
+            fl = fl.replace("flex;  /*collapse*/", "none;")
+
+        if company == "st":
+            fl = fl.replace("hidden", "visible")
+
     styles = fl
 
-def functional_design(name, hotel, pax, flight, time, date):
-    # Load images as base64 to embed directly in HTML
-    def image_to_base64(image_path):
-        try:
-            with open(image_path, "rb") as img_file:
-                return base64.b64encode(img_file.read()).decode('utf-8')
-        except FileNotFoundError:
-            print(f"Warning: Image file {image_path} not found.")
-            return ""
-
-    # Try to load images, use placeholders if not found
-    try:
-        logo_base64 = image_to_base64("../images/LOGO.png")
-        logo_img = f'<img class="logo-img" src="data:image/png;base64,{logo_base64}"/>'
-
-        departure_base64 = image_to_base64("../images/SALIDA.png")
-        departure_img = f'<img class="clock-icon" src="data:image/png;base64,{departure_base64}"/>'
-
-        st_base64 = image_to_base64("../images/ST_LOGO.png")
-        st_img = f'<img class="logo-st" src="data:image/png;base64,{st_base64}">'
-
-        id_base64 = image_to_base64("../images/ID.png")
-        id_img = f'<img class="id-st" src="data:image/png;base64,{id_base64}">'
-
-        template_base64 = image_to_base64("../images/BG.png")
-        bg_img = f'<img class="wave-bg" src="data:image/png;base64,{template_base64}"/>'
-
-        service_base64 = image_to_base64("../images/LLEGADA.png")
-        service_img = f'<img class="clock-icon" src="data:image/png;base64,{service_base64}"/>'
-
-        top_base64 = image_to_base64("../images/TOP_RIGHT.png")
-        top_img = f'<img class="logo-img" src="data:image/png;base64,{top_base64}"/>'
-
-        bottom_base64 = image_to_base64("../images/BOTTOM_LEFT.png")
-        bottom_img = f'<img class="logo-img" src="data:image/png;base64,{bottom_base64}"/>'
-    except FileNotFoundError:
-        return "Could not get some files to complete the operation"
+    logo = logo_img if company == "at" else st_img
+    service_image = service_img if service == "a" else departure_img
 
     design = f"""
         <!DOCTYPE html>
@@ -73,7 +83,7 @@ def functional_design(name, hotel, pax, flight, time, date):
         
                 <div class="logo-container">
                     <div class="logo">
-                        {st_img}
+                        {logo}
                     </div>
                 </div>
         
@@ -103,7 +113,7 @@ def functional_design(name, hotel, pax, flight, time, date):
                                 <div class="info-label">HOUR:</div>
                                 <div class="info-value">{time}</div>
                             </div>
-                            <div class="info-row">
+                            <div class="info-row-flight">
                                 <div class="info-label">FLIGHT:</div>
                                 <div class="info-value">{flight}</div>
                             </div>
@@ -113,7 +123,7 @@ def functional_design(name, hotel, pax, flight, time, date):
                             </div>
                         </div>
                         <div class="arrival-container">
-                            {service_img}
+                            {service_image}
                         </div>
                     </div>
                 </div>
@@ -125,9 +135,7 @@ def functional_design(name, hotel, pax, flight, time, date):
 
 def create_slides():
     slides = """
-    Mustafa Khan,11:42 pm,DM 5805,8,Playa Coral B11
-    GUILLERMO Rosco,02:00 pm,UA 2122,03,Ocean Blue & Sand
-    Luigi Mendez,12:36 pm,B6 1077,02,Secrets Royal Beach PUJ
+Bryan Herechuk,02:30 pm,F8 2630,4,ROYALTON SPLASH PUJ
     """
 
     slides = slides.strip().split("\n")
@@ -143,6 +151,12 @@ def create_slides():
         date = str(datetime.datetime.today()).split()[0]
 
         HTML(string=functional_design(name.strip().split(" "), hotel, pax, flight, time, date), base_url=".").write_pdf(f"{name.strip()}.pdf")
+        HTML(string=functional_design(name.strip().split(" "), hotel, pax, flight, time, date, "st"), base_url=".").write_pdf(
+            f"{name.strip()}1.pdf")
+        HTML(string=functional_design(name.strip().split(" "), hotel, pax, flight, time, date, service="d"), base_url=".").write_pdf(
+            f"{name.strip()}2.pdf")
+        HTML(string=functional_design(name.strip().split(" "), hotel, pax, flight, time, date, company="st", service="d"), base_url=".").write_pdf(
+            f"{name.strip()}3.pdf")
 
 
 create_slides()
