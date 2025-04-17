@@ -5,7 +5,7 @@ THen, we want to change the data to delete unnecessary information. Arrivals and
 These processes must be done for each company and return all the data in a single text
 """
 
-from core_utils import *
+from extended import *
 from utils import *
 import os
 
@@ -24,6 +24,7 @@ AVAILABLE_COMMANDS = {
 
     "help": ("", ""),
     "exit": ("", ""),
+    "flights": ("", ""),
     "names": ("", ""),
     "pdfs": ("", ""),
     "write": ("", ""),
@@ -33,6 +34,7 @@ AVAILABLE_COMMANDS = {
 ACTIONS = {
     "pdfs": lambda a,b,c,d: create_pdfs(a, b, c, d),
     "names": lambda a: print(get_names(a)) ,
+    "flights": lambda a: print(get_flights(a)),
     "write": lambda a, b, c, d: write_to_directory(a, b, c, d),
     "help": lambda a, b: print(print_help(a, b))
 }
@@ -58,7 +60,7 @@ def company_split(data: str) -> [[]]:
     header_data, sliced_data = get_columns(data)
     HEADER = header_data[1]
     # print(len(","*header_data[0]) == len(",,,,,,,,,,,"))
-    return sliced_data.strip().split(",,,,,,,,,,,")
+    return sliced_data.strip().split(",,,,,,,,,,,,")
 
 # STEP 2: now we want to separate the data in arrivals / departures from each data bucket
 def organize_by_type(data: [[]], company_index: int, valid_data=None):
@@ -77,6 +79,7 @@ def organize_by_type(data: [[]], company_index: int, valid_data=None):
         }
     return result
 
+# TODO: this still needs a better approach
 def program(data):
 
     while True:
@@ -87,15 +90,22 @@ def program(data):
         try:
             if command[0] in ACTIONS.keys():
                 cmds = AVAILABLE_COMMANDS[command[1]]
-                if command[0] == "pdfs":
-                    ACTIONS[command[0]](data, AVAILABLE_COMMANDS[command[1]], command[1], path)
-                elif command[0] == "names":
-                    ACTIONS[command[0]](data[cmds[0]][cmds[1]])
-                elif command[0] == "write":
+                c = command[0]
+
+                if c == "pdfs":
+                    ACTIONS[c](data, AVAILABLE_COMMANDS[command[1]], command[1], path)
+                elif c == "names":
+                    ACTIONS[c](data[cmds[0]][cmds[1]])
+                elif c == "flights":
+                    if not command[1][-1] == "d":
+                        ACTIONS[c](data[cmds[0]][cmds[1]])
+                    else:
+                        colored_print("Departures do not provide flights we need to check on.", "yellow")
+                elif c == "write":
                     hd_type = command[1][-1]
-                    ACTIONS[command[0]](path, f"{command[1]}", data[cmds[0]][cmds[1]], HEADER_TYPE[hd_type])
-                elif command[0] == "help":
-                    ACTIONS[command[0]](command[1], AVAILABLE_COMMANDS)
+                    ACTIONS[c](path, f"{command[1]}", data[cmds[0]][cmds[1]], HEADER_TYPE[hd_type])
+                elif c == "help":
+                    ACTIONS[c](command[1], AVAILABLE_COMMANDS)
                 continue
 
             if command == "exit":

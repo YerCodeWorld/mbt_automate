@@ -1,4 +1,8 @@
-
+"""
+Called extended as these are just part of the main core logic.
+Only that separated for better maintainability, and also because these are like
+helper functions for the actual process.
+"""
 # USED IN STEP 1
 def get_columns(data: str):
     """

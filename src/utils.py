@@ -31,6 +31,10 @@ def get_names(data: str) -> list[str]:
     """
     return [row.split(",")[0] for row in data.strip().split("\n")]
 
+# USED WHEN FLIGHT COMMAND IS TYPED IN
+def get_flights(data: str):
+    return [row.split(",")[2] for row in data.strip().split("\n")]
+
 # USED WHEN WRITE COMMAND IS TYPED ON
 def write_to_directory(path: str, file: str, content: str, header: str):
 
