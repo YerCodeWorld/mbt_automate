@@ -1,4 +1,5 @@
 import datetime
+from datetime import timedelta
 import os
 from weasyprint import HTML
 import base64
@@ -136,7 +137,7 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
         """
     return design
 
-def create_slides(data, company, service):
+def create_slides(data, company, service, date="tomorrow"):
     slides = data
     slides = slides.strip().split("\n")
 
@@ -146,13 +147,27 @@ def create_slides(data, company, service):
         name = slide[0].upper()
         time = slide[1].upper()
         # For we will keep checking the flights manually and introducing them here as hard coded values
-        # flight = slide[2].upper()
-        pax = slide[2].upper()
-        hotel = slide[3].upper()
-        date = str(datetime.datetime.today()).split()[0]
+        flight = ""
+        if service == "a":
+            flight = slide[2]
+            pax = slide[3]
+            hotel = slide[4]
+        else:
+            pax = slide[2].upper()
+            hotel = slide[3].upper()
+
+        date = ""
+        if date == "tomorrow":
+            date = str(datetime.datetime.today() + timedelta(days=1)).split()[0]
+        else:
+            date = str(datetime.datetime.today())
         # might also add logic to delete the current files in the directory
         output_dir = f"{path}/OPERATIONS/{company.upper()+service.upper()}/{name.strip()} - {company.upper()}.pdf"
         HTML(
             string=functional_design(
-                name.strip().split(" "), hotel, pax, time, date, company=company.lower(), service=service.lower()), base_url="."
+                name.strip().split(" "), hotel, pax, time, date, flight=flight, company=company.lower(), service=service.lower()), base_url="."
         ).write_pdf(output_dir)
+
+
+
+# create_slides(None, "st", "a")

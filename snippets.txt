@@ -1,0 +1,101 @@
+# I believe the enconding we used caused characters like á or ó to not be recognized properly
+Data we want:
+
+DECLARE:
+    - reservation_no
+    - segment (vehicle)
+    - pickup_location --> name
+    - drop_of_location --> name
+    - passenger --> name & surname
+    - travel --> flight_number & converted(flight_arrival) &? arrival_type
+    - travelers --> adult & children & infant
+
+#APPLY_TO_ALL(pickup_location & drop_of_location) reduced() # As they contain unnecessary information
+Service 1
+
+reservation_no : "ATC-1744651284-FST"
+segment : "Executive Sedan"
+pickup_location : "Punta Cana International Airport"
+drop_of_location : "Occidental Caribe - All Inclusive, Punta Cana, Dominican Republic"
+passenger : name("DANIELLE") & surname("ROCHA")
+travel : flight_number("CM 110") & flight_arrival(!converted()"2025-04-18T11:30:00.000000Z")
+travelers : adult(2) & children(0) & infant(0)
+
+determinedType = Arrival
+converted(travel.flight_arrival) = 11:30 am
+
+
+Service 2
+
+reservation_no :"ATC-1743455517-FIK"
+segment : "Executive Sedan"
+pickup_location : "Punta Cana International Airport"
+drop_of_location : "Bahia Principe Grand Aquamarine"
+passenger : name("RICARDO ALBERTO CLAVO") & surname("EGOAVIL") #(name)NEEDS reduceName()
+travel : flight_number("LA 2452") & flight_arrival(!converted()"2025-04-18T15:20:00.000000Z")
+travelers : adult(2) & children(0) & infant(0)
+
+determinedType = Arrival
+converted(travel.flight_arrival) = 03:20 pm
+
+Service 3
+
+reservation_no : "ATC-1743257214-JIT"
+segment : "Executive Sedan"
+pickup_location : "Bahia Principe Grand Punta Cana"
+drop_of_location : "Punta Cana International Airport"
+passenger : name("Vania Yubitza Lopez") & surname("Aranibar") #(name)NEEDS reduceName()
+travel : flight_number("CM 426") & flight_arrival(!converted()"2025-04-18T09:15:00.000000Z")
+travelers : adult(2) & children(0) & infant(0)
+
+determinedType = Departure
+converted(travel.flight_arrival) =  09:15 pm
+
+Service 4
+
+reservation_no : "ATC-1742954118-EMA"
+segment : "Executive Sedan"
+pickup_location : "Punta Cana International Airport"
+drop_of_location : "Bahia Principe Grand Punta Cana"
+passenger : name(Cecilia del carmen sepulveda) & surname(soissa) #(name)NEEDS reduceName()
+travel: flight_number(CM 352) & flight_arrival(!converted()"2025-04-18T16:55:00.000000Z")
+travelers: adult(2) & children(0) & infant(0)
+
+determinedType = Arrival
+converted(travel.flight_arrival) = 04:55 pm
+
+Service 5
+
+reservation_no : "ATC-1742944438-SKC"
+segment : "Executive Sedan"
+pickup_location : "Punta Cana International Airport"
+drop_of_location : "Grand Bavaro Princess" #APLLIED reduced()
+passenger : name(Alex Rodrigo Zuñiga) & surname(Cisternas) #(name)NEEDS reduceName()
+travel: flight_number(CM 352) & flight_arrival(!converted()"2025-04-18T16:55:00.000000Z")
+travelers: adult(2) & children(0) & infant(0)
+
+determinedType = Arrival
+converted(travel.flight_arrival) = 04:55 pm
+
+Service 6
+
+reservation_no : "ATC-1742310333-BVW"
+segment : "Executive Sedan"
+pickup_location : "Punta Cana International Airport"
+drop_of_location : "Bahia Principe Grand Aquamarine" #APLLIED reduced()
+passenger : name(Viviana Silvina) & surname(Rosemberg) #(name)NEEDS reduceName()
+travel: flight_number(LA2450) & flight_arrival(!converted()"2025-04-18T18:00:00.000000Z")
+travelers: adult(3) + children(0) + infant(0)
+
+determinedType = Arrival
+converted(travel.flight_arrival) = 06:00 pm
+
+COMPLETE:
+
+Remaining services (7, 8, 9)
+
+The remaining services containing information on the return flight, if that is not null as in
+the other services we need to check it out for several reasons. If this return flights has date for
+today that means that's the time we should be checking instead of the flight arrival. This would also
+mean that if the return time is today, the service is a departure, not an arrival. We shouldn;t
+care about flight codes for departures neither.

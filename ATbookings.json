@@ -1,0 +1,1163 @@
+[
+    {
+        "id": 122392,
+        "reservation_no": "ATC-1744651284-FST",
+        "search_id": "fc02bc8a-07b3-45d4-8166-d2db1fc16a13",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Mercedes-Benz",
+            "car_model": "E-Class",
+            "car_type": "Sedan",
+            "car_full": "Mercedes-Benz E-Class"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Occidental Caribe - All Inclusive, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "DANIELLE",
+            "surname": "ROCHA",
+            "phone": "+5541998150325",
+            "email": "ATC-1744651284-FST@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "CM 110",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T11:30:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "23.00",
+            "total": "23.00",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 26854,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-04-14T17:21:11.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14383267107",
+        "payment_type": "Third Party",
+        "earning": "23.00",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Your driver will be waiting for you at the arrivals hall with your name on a board.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 119884,
+        "reservation_no": "ATC-1743455517-FIK",
+        "search_id": "e57313c0-a14a-42a2-88eb-6de90bc6af5d",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Bahia Principe Grand Aquamarine, Carretera El Macao - Arena Gorda, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "RICARDO ALBERTO CLAVO",
+            "surname": "EGOAVIL",
+            "phone": "+51942575774",
+            "email": "ATC-1743455517-FIK@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "LA 2452",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T15:20:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "22.38",
+            "total": "22.38",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 25728,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-03-31T21:11:39.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14286224507",
+        "payment_type": "Third Party",
+        "earning": "22.38",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Su conductor lo estar\u00e1 esperando en la sala de llegadas con un cartel con su nombre.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 119436,
+        "reservation_no": "ATC-1743257214-JIT",
+        "search_id": "3fa87061-f056-4644-b98e-100f74805105",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Bahia Principe Grand Punta Cana, Carretera El Macao - Arena Gorda, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "drop_of_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "passenger": {
+            "name": "Vania Yubitza Lopez",
+            "surname": "Aranibar",
+            "phone": "+56963009302",
+            "email": "ATC-1743257214-JIT@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "CM 426",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T09:15:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "23.00",
+            "total": "23.00",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 25914,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-03-29T14:06:34.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14270424407",
+        "payment_type": "Third Party",
+        "earning": "23.00",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": null,
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 118745,
+        "reservation_no": "ATC-1742954118-EMA",
+        "search_id": "84c7ce21-df9f-4dac-b1d3-466acc7991e1",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Bahia Principe Grand Punta Cana, Carretera El Macao - Arena Gorda, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "Cecilia del carmen sepulveda",
+            "surname": "soissa",
+            "phone": "+56966574391",
+            "email": "ATC-1742954118-EMA@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "CM 352",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T16:55:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "22.44",
+            "total": "22.44",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 26031,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-03-26T01:54:55.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14234300807",
+        "payment_type": "Third Party",
+        "earning": "22.44",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Su conductor lo estar\u00e1 esperando en la sala de llegadas con un cartel con su nombre.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 118710,
+        "reservation_no": "ATC-1742944438-SKC",
+        "search_id": "0b4af759-1943-4846-9d66-6f200add081d",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Grand B\u00e1varo Princess, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "Alex Rodrigo Zu\u00f1iga",
+            "surname": "Cisternas",
+            "phone": "+56945973694",
+            "email": "ATC-1742944438-SKC@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "CM 352",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T16:55:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "22.38",
+            "total": "22.38",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 21747,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-03-25T23:13:41.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14241882407",
+        "payment_type": "Third Party",
+        "earning": "22.38",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Your driver will be waiting for you at the arrivals hall with your name on a board.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 117428,
+        "reservation_no": "ATC-1742310333-BVW",
+        "search_id": "91e05b9c-794e-4f80-aa00-c03ed2bdcc01",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Bahia Principe Grand Aquamarine, Carretera El Macao - Arena Gorda, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "Viviana Silvina",
+            "surname": "Rosemberg",
+            "phone": "+541166247385",
+            "email": "ATC-1742310333-BVW@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": "LAN",
+            "flight_number": "LA2450",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T18:00:00.000000Z",
+            "return": null,
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": null
+        },
+        "travelers": {
+            "adult": 3,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "22.48",
+            "total": "22.48",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ONEWAY",
+        "distance": 25728,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-03-18T15:04:16.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14185512307",
+        "payment_type": "Third Party",
+        "earning": "22.48",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Your driver will be waiting for you at the arrivals hall with your name on a board.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 113572,
+        "reservation_no": "ATC-1740232747-XKQ",
+        "search_id": "b51919b2-8d73-49fe-a38c-c3571a4d70e2",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Grand Sirenis Punta Cana Resort, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "Gabriel Jos\u00e9",
+            "surname": "Furlan",
+            "phone": "+5511991047007",
+            "email": "ATC-1740232747-XKQ@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": "CMP",
+            "flight_number": "CM748",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T16:35:00.000000Z",
+            "return": "2025-04-24T09:15:00.000000Z",
+            "departure_time": null,
+            "return_airline": "CMP",
+            "return_flight_number": "CM426"
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 1,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "74.00",
+            "total": "74.00",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 3,
+        "small_bags": 0,
+        "booking_type": "ROUNDTRIP",
+        "distance": 42656,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2025-02-22T13:58:20.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "14020531007",
+        "payment_type": "Third Party",
+        "earning": "74.00",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Your driver will be waiting for you at the arrivals hall with your name on a board.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 99605,
+        "reservation_no": "ATC-1734059010-PIV",
+        "search_id": "3806faa5-ca45-46f7-9eb2-26ce5abcac42",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Hotel Riu Bambu, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "Cala Mikaela Gedda",
+            "surname": "Corces",
+            "phone": "+56982698557",
+            "email": "ATC-1734059010-PIV@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": null,
+            "flight_number": "CM 425",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T11:35:00.000000Z",
+            "return": "2025-04-25T14:25:00.000000Z",
+            "departure_time": null,
+            "return_airline": null,
+            "return_flight_number": "CM 749"
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "46.00",
+            "total": "46.00",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 2,
+        "small_bags": 0,
+        "booking_type": "ROUNDTRIP",
+        "distance": 25196,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2024-12-13T03:01:32.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "13579817307",
+        "payment_type": "Third Party",
+        "earning": "46.00",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Su conductor lo estar\u00e1 esperando en la sala de llegadas con un cartel con su nombre.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    },
+    {
+        "id": 97776,
+        "reservation_no": "AT-1733169104-PNH",
+        "search_id": "5305f03a-1d7d-4872-92ab-7b6a2f33c352",
+        "pending_refund_request_status": false,
+        "booking_financial_warn": null,
+        "booking_case": {
+            "add_blocking": false,
+            "case_note": null,
+            "case_files": []
+        },
+        "has_penalty": false,
+        "segment": "Executive Sedan",
+        "airport": {
+            "name": "Punta Cana International Airport",
+            "code": "PUJ",
+            "country_code": "DO",
+            "icao_code": null
+        },
+        "transporter": {
+            "company": "MB TRANSFER PUNTA CANA",
+            "phone": "+18295194057",
+            "car_make": "Kia",
+            "car_model": "K5",
+            "car_type": "Sedan",
+            "car_full": "Kia K5"
+        },
+        "driver_assignment": {
+            "driver_user_id": null,
+            "return_driver_user_id": null,
+            "phone_number": null,
+            "return_phone_number": null,
+            "plate_number": null,
+            "return_plate_number": null
+        },
+        "pickup_location": {
+            "name": "Punta Cana International Airport",
+            "type": "AIRPORT"
+        },
+        "drop_of_location": {
+            "name": "Hotel Riu Palace Bavaro, Punta Cana, Dominican Republic",
+            "type": "PLACE"
+        },
+        "passenger": {
+            "name": "ARIEL HORACIO",
+            "surname": "QUIROZ VALERIA",
+            "phone": "+56984556721",
+            "email": "AT-1733169104-PNH@reservations.airporttransfer.com"
+        },
+        "travel": {
+            "name": null,
+            "surname": null,
+            "extra_requests": null,
+            "additional_directions": null,
+            "airlines": "LAN",
+            "flight_number": "LA2452",
+            "arrival_type": "landing",
+            "flight_arrival": "2025-04-18T16:05:00.000000Z",
+            "return": "2025-04-25T15:25:00.000000Z",
+            "departure_time": null,
+            "return_airline": "LAN",
+            "return_flight_number": "LA2461"
+        },
+        "travelers": {
+            "adult": 2,
+            "children": 0,
+            "infant": 0
+        },
+        "price": {
+            "sub_total": "42.06",
+            "total": "42.06",
+            "discount": 0,
+            "refund_amount": "0.00",
+            "refund_direction": null,
+            "currency": "USD",
+            "extras": null,
+            "wallet_total": "0.00",
+            "wallet_included_total": "0.00",
+            "convert_total": null,
+            "convert_currency": null,
+            "convert_rate": null
+        },
+        "suitcase": 3,
+        "small_bags": 0,
+        "booking_type": "ROUNDTRIP",
+        "distance": 24726,
+        "status": "APPROVED",
+        "finance_status": "APPROVED",
+        "extra_status": null,
+        "is_cancelable": false,
+        "socket_information": {
+            "is_active": true,
+            "booking_approved_lists": {
+                "transfer-start": false,
+                "on-location": false,
+                "transfer-completed": false,
+                "pending-approved-lists": []
+            }
+        },
+        "pricing_type": "LocationBasedPricing",
+        "created_at": "2024-12-02T19:51:44.000000Z",
+        "order_arrival_type": "local",
+        "order_structure_type": "Despegar",
+        "order_structure_reference": "13512662707",
+        "payment_type": "Third Party",
+        "earning": "42.06",
+        "company_earning": "0",
+        "is_transferable": false,
+        "booking_invoice": null,
+        "is_invoice": false,
+        "meeting_point": "Su conductor lo estar\u00e1 esperando en la sala de llegadas con un cartel con su nombre.",
+        "offer_status": 0,
+        "company_information_id": 2167,
+        "api_ride_id": null,
+        "sales_marketing": null,
+        "api_user": null,
+        "driver": null,
+        "booking_reference_type": {
+            "status": true,
+            "type": "Custom Booking",
+            "name": "Despegar",
+            "extra_data": null,
+            "is_partnership": false
+        },
+        "modal_has_comments": null,
+        "risk_score": null,
+        "is_partnership": false,
+        "logs": []
+    }
+]

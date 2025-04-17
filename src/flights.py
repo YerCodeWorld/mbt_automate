@@ -44,6 +44,7 @@ def convert_flight_code(global_code: str):
         "AM": "AMX",  # Aeromexico
         "Y4": "VOI",  # Volaris
         "VB": "VIV",  # VivaAerobus
+        "American": "AA"
     }
     try:
         prefix = global_code.split(" ")[0]
@@ -143,3 +144,4 @@ def api(data):
         print(f"Got flight {flight}:", get_flight_time(flight))
     print("Done my broda")
 
+# api(["American 2337", ""])

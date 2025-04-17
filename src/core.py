@@ -13,7 +13,7 @@ import os
 
 # TODO: Implement getting this info from JSON file
 path = os.path.expanduser("~/Desktop")
-file = "TODAY.csv"
+file = "extracted.csv"
 
 # TODO: create these dynamically
 AVAILABLE_COMMANDS = {
@@ -35,13 +35,15 @@ AVAILABLE_COMMANDS = {
 }
 
 ACTIONS = {
-    "pdfs": lambda a,b,c,d: create_pdfs(a, b, c, d),
-    "create": lambda a, b, c: slides(a, b, c),
-    "names": lambda a: print(get_names(a)),
-    "flights": lambda a: print(get_flights(a)),
-    "checkfl": lambda a: print(flight_check(get_flights(a))),
-    "write": lambda a, b, c, d: write_to_directory(a, b, c, d),
-    "help": lambda a, b: print(print_help(a, b))
+    # We could pass the arguments here directly? I don't knoW...
+    # Not very optimistic for these approaches.
+    "pdfs":     lambda a,b,c,d:     create_pdfs(a, b, c, d),
+    "create":   lambda a, b, c:     slides(a, b, c),
+    "names":    lambda a:           print(get_names(a)),
+    "flights":  lambda a:           print(get_flights(a)),
+    "checkfl":  lambda a:           print(flight_check(get_flights(a))),
+    "write":    lambda a, b, c, d:  write_to_directory(a, b, c, d),
+    "help":     lambda a, b:        print(print_help(a, b))
 }
 
 HEADER_TYPE = {
@@ -97,6 +99,9 @@ def program(data):
 
                 cmds = AVAILABLE_COMMANDS[command[1]]
                 c = command[0]
+
+                # An approach we could take is passing all the possible arguments to a dictionary and pass that
+                # dictionary to helper functions, that way reducing the clumsiness of this function.
 
                 if c == "pdfs":
                     ACTIONS[c](data, AVAILABLE_COMMANDS[command[1]], command[1], path)
