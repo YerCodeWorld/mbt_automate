@@ -56,6 +56,8 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
 
     styles = fl
 
+    surname = ' '.join([part for part in name[1:]]) if len(name) > 1 else name[1]
+
     logo = logo_img if company == "at" else st_img
     service_image = service_img if service == "a" else departure_img
 
@@ -93,7 +95,7 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
         
                 <div class="name-container">
                     <h1 class="first-name">{name[0]}</h1>
-                    <h1 class="last-name">{name[1]}</h1>
+                    <h1 class="last-name">{surname}</h1>
                 </div>
         
                 <div class="divider"></div>
@@ -137,7 +139,7 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
         """
     return design
 
-def create_slides(data, company, service, date="tomorrow"):
+def create_slides(data, company, service):
     slides = data
     slides = slides.strip().split("\n")
 
@@ -156,11 +158,9 @@ def create_slides(data, company, service, date="tomorrow"):
             pax = slide[2].upper()
             hotel = slide[3].upper()
 
-        date = ""
-        if date == "tomorrow":
-            date = str(datetime.datetime.today() + timedelta(days=1)).split()[0]
-        else:
-            date = str(datetime.datetime.today())
+        date = (str(datetime.datetime.today() + timedelta(days=1))).split()[0]
+
+        # date = str(datetime.datetime.today())
         # might also add logic to delete the current files in the directory
         output_dir = f"{path}/OPERATIONS/{company.upper()+service.upper()}/{name.strip()} - {company.upper()}.pdf"
         HTML(

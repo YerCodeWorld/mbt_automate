@@ -7,13 +7,13 @@ These processes must be done for each company and return all the data in a singl
 
 from extended import *
 from utils import *
-from slide_generator import create_slides as slides
+from generator import create_slides as slides
 from flights import api as flight_check
 import os
 
 # TODO: Implement getting this info from JSON file
 path = os.path.expanduser("~/Desktop")
-file = "extracted.csv"
+file = "TODAY.csv"
 
 # TODO: create these dynamically
 AVAILABLE_COMMANDS = {
@@ -67,7 +67,7 @@ def company_split(data: str) -> [[]]:
     header_data, sliced_data = get_columns(data)
     HEADER = header_data[1]
     # print(len(","*header_data[0]) == len(",,,,,,,,,,,"))
-    return sliced_data.strip().split(",,,,,,,,,,,,")
+    return sliced_data.strip().split(",,,,,,,,,,,")
 
 # STEP 2: now we want to separate the data in arrivals / departures from each data bucket
 def organize_by_type(data: [[]], company_index: int, valid_data=None):
