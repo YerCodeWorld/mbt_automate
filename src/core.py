@@ -5,10 +5,12 @@ THen, we want to change the data to delete unnecessary information. Arrivals and
 These processes must be done for each company and return all the data in a single text
 """
 
-from extended import *
-from utils import *
-from generator import create_slides as slides
-from flights import api as flight_check
+from src.extended import *
+from src.utils import *
+from src.airportTransfer import generate_at_bookings
+from src.extract import extract
+from src.generator import create_slides as slides
+from src.flights import api as flight_check
 import os
 
 # TODO: Implement getting this info from JSON file
@@ -26,12 +28,18 @@ AVAILABLE_COMMANDS = {
 
 DATA = {}
 
+def correct_flight_bridge(c):
+    DATA[c[0]][c[1]] = correct_flights(DATA[c[0]][c[1]], c[0], c[1][3:])
+
 ACTIONS = {
     # "pdfs":              lambda a,b,c,d:     create_pdfs(a, b, c, d),
     "create":            lambda c:           slides(DATA[c[0]][c[1]], c[0], c[1]),
     "names":             lambda c:           print_names(get_names(DATA[c[0]][c[1]])),
     "flights":           lambda c:           print_flights(get_flights(DATA[c[0]][c[1]]), c[1]),
-    "checkflights":      lambda c:           print(flight_check(get_flights(DATA[c[0]][c[1]]), c[1])),
+    "checkflights":      lambda c:           flight_check(get_flights(DATA[c[0]][c[1]]), c[1]),
+    "correctflights":    lambda c:           correct_flight_bridge(c),
+    "bookings":          lambda c:           generate_at_bookings(),
+    "extract":           lambda c:           extract()
     # "write":             lambda a, b, c, d:  write_to_directory(a, b, c, d),
 }
 
@@ -60,7 +68,7 @@ def company_split(data: str) -> [[]]:
 
     # OUR CURRENT DOCUMENT CONTAINS BLANK LINE SEPARATING COMPANIES, WHICH IS REPRESENTED AS COMMAS (ROWS)
     # If something more solid is needed, we would need to read the "COMP" colum to determine when we find a different company
-    return sliced_data.strip().split(',,,,,,,,,,,')
+    return sliced_data.strip().split(',,,,,,,,,,,,')
 
 # STEP 2: now we want to separate the data in arrivals / departures from each data bucket
 def organize_by_type(data: [[]], company_index: int, valid_data=None):

@@ -5,7 +5,6 @@ Uses AreoAPI for real-time accurate data..
 
 import requests
 import json
-from utils import colored_print
 from datetime import datetime, timedelta, UTC
 import pytz
 
@@ -13,6 +12,15 @@ import pytz
 # I gotta use .env files. But not worth the hassle for the moment
 api_key = "FTRH5ucRFrmAxSRV4FExcClLLoM0oGKY"
 apiUrl = "https://aeroapi.flightaware.com/aeroapi/"
+
+def colored_print(message: str, color):
+    colors = {
+        "red": 31,
+        "green": 32,
+        "yellow": 33,
+        "blue": 34
+    }
+    print(f"\033[{colors[color]}m{message}\033[0m")
 
 def convert_flight_code(global_code: str):
     # Welp... our api needs this... let's give it to it for it to work.
@@ -139,17 +147,23 @@ def get_flight_time(code: str, date="tomorrow"):
 
 def api(data, service_type):
 
-    if service_type[3:] == "departures":
-        return colored_print("Departures do not provide flights we need to check on.", "yellow")
-
-    for fl in data:
-
-        time = get_flight_time(fl)
-
+    def print_result(result, fl):
         if time is not None:
-            print(colored_print(f"Got flight {fl}: {time}", "green"))
+            colored_print(f"Got flight {fl}: {time}", "green")
         else:
             colored_print(f"Flight {fl} returned nothing:", "yellow")
             colored_print("Make sure it is a PUJ flight or check the validity of the code.", "red")
+
+    if service_type[3:] == "departures":
+        return colored_print("Departures do not provide flights we need to check on.", "yellow")
+
+    if isinstance(data, str):
+        time = get_flight_time(data)
+        print_result(time, data)
+        return time
+    else:
+        for fl in data:
+            time = get_flight_time(fl)
+            print_result(time, fl)
 
     colored_print("Process completed", "green")

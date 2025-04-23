@@ -1,4 +1,6 @@
 from pypdf import PdfReader, PdfWriter
+from src.flights import api as flight_check
+from datetime import datetime
 
 # I could use the console purely on white but meh I like this better
 def colored_print(message: str, color):
@@ -45,6 +47,38 @@ def print_flights(flights, service_type):
         return colored_print("Departures do not provide flights we need to check on.", "yellow")
     for i, flight in enumerate(flights):
         print(f"{i + 1} - {flight}")
+
+def correct_flights(data, company, service_type):
+    def to_12h_format(time_str):
+        """Convert a 24h time string (e.g., '16:45') to 12h format with AM/PM."""
+        try:
+            # Parse the 24h time
+            time_obj = datetime.strptime(time_str, "%H:%M")
+            # Format as 12h with am/pm (lowercase), or use %I:%M %p for uppercase
+            return time_obj.strftime("%-I:%M %p").lower()  # For Unix/Linux/macOS
+        except ValueError:
+            return "Invalid time format"
+
+    if service_type == "departures":
+        return colored_print("Departures do not provide flights we need to check on.", "yellow")
+
+    services = data.strip().split("\n")
+    updated_data = []
+    current_service = []
+
+    for service in services:
+        service = service.split(",")
+        service[1] = flight_check(service[2], service_type)
+        for col in service:
+            if col is not None:
+                current_service.append(col)
+            else:
+                current_service.append("Not found")
+
+        updated_data.append(','.join(current_service))
+        current_service = []
+
+    return '\n'.join([row for row in updated_data])
 
 # USED WHEN WRITE COMMAND IS TYPED ON
 def write_to_directory(path: str, file: str, content: str, header: str):

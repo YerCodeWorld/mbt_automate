@@ -19,38 +19,38 @@ def image_to_base64(image_path):
         return ""
 
 try:
-    logo_base64 = image_to_base64("../images/LOGO.png")
+    logo_base64 = image_to_base64("images/LOGO.png")
     logo_img = f'<img class="logo-img" src="data:image/png;base64,{logo_base64}"/>'
 
-    departure_base64 = image_to_base64("../images/SALIDA.png")
+    departure_base64 = image_to_base64("images/SALIDA.png")
     departure_img = f'<img class="clock-icon" src="data:image/png;base64,{departure_base64}"/>'
 
-    st_base64 = image_to_base64("../images/ST_LOGO.png")
+    st_base64 = image_to_base64("images/ST_LOGO.png")
     st_img = f'<img class="logo-st" src="data:image/png;base64,{st_base64}">'
 
-    id_base64 = image_to_base64("../images/ID.png")
+    id_base64 = image_to_base64("images/ID.png")
     id_img = f'<img class="id-st" src="data:image/png;base64,{id_base64}">'
 
-    template_base64 = image_to_base64("../images/BG.png")
+    template_base64 = image_to_base64("images/BG.png")
     bg_img = f'<img class="wave-bg" src="data:image/png;base64,{template_base64}"/>'
 
-    service_base64 = image_to_base64("../images/LLEGADA.png")
+    service_base64 = image_to_base64("images/LLEGADA.png")
     arrival_img = f'<img class="clock-icon" src="data:image/png;base64,{service_base64}"/>'
 
-    top_base64 = image_to_base64("../images/TOP_RIGHT.png")
+    top_base64 = image_to_base64("images/TOP_RIGHT.png")
     top_img = f'<img class="logo-img" src="data:image/png;base64,{top_base64}"/>'
 
-    bottom_base64 = image_to_base64("../images/BOTTOM_LEFT.png")
+    bottom_base64 = image_to_base64("images/BOTTOM_LEFT.png")
     bottom_img = f'<img class="logo-img" src="data:image/png;base64,{bottom_base64}"/>'
 except FileNotFoundError:
     print("Could not get some files to complete the operation")
 
-def functional_design(name, hotel, pax, time, date, company="at", service="a", flight=None):
+def functional_design(name, hotel, pax, time, date, company="at", service="arrivals", flight=None):
     # Change logo depending on type.
     # Simply toggle visibility for the id variation.
-    with open("../style.css", "r") as fl:
+    with open("style.css", "r") as fl:
         fl = fl.read()
-        if service == "d":  # Used the comment to identify the exact line I want to replace.
+        if service == "departures":  # Used the comment to identify the exact line I want to replace.
             fl = fl.replace("flex;  /*collapse*/", "none;")
         if company == "st":
             fl = fl.replace("hidden", "visible")  # Only case where this happens, should use the same comment strategy
@@ -59,7 +59,7 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
     surname = ' '.join([part for part in name[1:]]) if len(name) > 1 else name[1]
 
     logo = logo_img if company == "at" else st_img
-    service_image = arrival_img if service == "a" else departure_img
+    service_image = arrival_img if service == "arrivals" else departure_img
 
     design = f"""
         <!DOCTYPE html>
@@ -139,18 +139,33 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
         """
     return design
 
+def remove_tildes(name) -> str:
+    cases = {
+        "á": "a",
+        "é": "e",
+        "í": "i",
+        "ó": "o",
+        "ú": "u"
+    }
+    new_name = name
+    for chr in name:
+        if chr in cases:
+            new_name = new_name.replace(chr, cases[chr])
+    return new_name.upper()
+
 def create_slides(data, company, service):
     slides = data.strip().split("\n")
+    service = service[3:]
 
     for slide in slides:
 
         slide = slide.split(",")
 
-        name = slide[0].upper()
+        name = remove_tildes(slide[0].lower())
         time = slide[1].upper()
         # For we will keep checking the flights manually and introducing them here as hard coded values
         flight = ""
-        if service[3:] == "arrivals":
+        if service == "arrivals":
             flight = slide[2]
             pax = slide[3]
             hotel = slide[4].upper()

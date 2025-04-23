@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: 'Shrikhand';
-    src: url('../fonts/Shrikhand-Regular.ttf') format('truetype');
+    src: url('fonts/Shrikhand-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

@@ -8,7 +8,7 @@ and just automate the blood out of that process too.
 import json
 import requests
 import datetime
-from utils import colored_print
+from src.utils import colored_print
 from datetime import timedelta
 
 def generate_at_bookings():
@@ -29,11 +29,13 @@ def generate_at_bookings():
 
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        colored_print("Got AT's today's data!", "green")
+        colored_print("Got AirportTransfer's today's data!", "green")
 
-    with open("ATbookings.json", "w", encoding="utf-8") as fl:
-        data = response.json()
-        json.dump(data, fl, indent=4)
+    with open("src/ATbookings.json", "w", encoding="utf-8") as fl:
+        if fl:
+            data = response.json()
+            json.dump(data, fl, indent=4)
+        else:
+            colored_print("Something went wrong, could not open file.", "red")
 
 
-generate_at_bookings()

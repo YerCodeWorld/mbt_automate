@@ -3,7 +3,9 @@ import json
 import csv
 import os
 import datetime
-from utils import colored_print
+from copy import copy
+
+from src.utils import colored_print
 from datetime import timedelta
 from pathlib import Path
 
@@ -83,10 +85,14 @@ def process_json_to_csv(json_path, csv_path):
         total_services = 0
 
         for reservation in data:
+
             # Skip records that are not for the target date (tomorrow's)
             flight_arrival = reservation["travel"].get("flight_arrival", "")
+            return_date = reservation["travel"].get("return", "")
+
             if not flight_arrival or not flight_arrival.startswith(TOMORROW):
-                continue
+                if return_date == "null":
+                    continue
 
             # We don't need these services either
             refunded: bool = float(reservation["price"]["refund_amount"]) > 0
@@ -100,6 +106,14 @@ def process_json_to_csv(json_path, csv_path):
             pax_indices = ["adult", "children", "infant"]
             pax = sum([int(reservation["travelers"][ct]) for ct in pax_indices])
 
+            pickup_location = reservation["pickup_location"]["name"].split(",")[0]
+            drop_off = reservation["drop_of_location"]["name"].split(",")[0]
+
+            if str(return_date).startswith(TOMORROW):
+                cp = copy(pickup_location)
+                pickup_location = drop_off
+                drop_off = cp
+
             # Prepare row data
             row = {
                 "Tipo": service_type,
@@ -108,9 +122,9 @@ def process_json_to_csv(json_path, csv_path):
                 "Hora": flight_arrival,
                 "Vehiculo": reservation["segment"],
                 "Pax": pax,
-                "Desde": reservation["pickup_location"]["name"].split(",")[0],
-                "Hacia": reservation["drop_of_location"]["name"].split(",")[0],
-                "COMP": "AT"  # Will always be this
+                "Desde": pickup_location,
+                "Hacia": drop_off,
+                "COMP": "AT" # Will always be this
             }
 
             # Handle flight number and time based on service type
@@ -132,7 +146,7 @@ def process_json_to_csv(json_path, csv_path):
     colored_print(f"We got a total of {total_services} services. Make sure this aligns with the amount shown in AirportTransfer Website", "yellow")
 
 
-if __name__ == "__main__":
+def extract():
     # Paths
     json_file = "ATbookings.json"  # Update this path to your JSON file location
     csv_file = "extracted.csv"
