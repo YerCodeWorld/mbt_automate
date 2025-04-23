@@ -4,6 +4,8 @@ import os
 from weasyprint import HTML
 import base64
 
+from src.utils import colored_print
+
 path = os.path.expanduser("~/Desktop")
 file = "TODAY.csv"
 
@@ -33,7 +35,7 @@ try:
     bg_img = f'<img class="wave-bg" src="data:image/png;base64,{template_base64}"/>'
 
     service_base64 = image_to_base64("../images/LLEGADA.png")
-    service_img = f'<img class="clock-icon" src="data:image/png;base64,{service_base64}"/>'
+    arrival_img = f'<img class="clock-icon" src="data:image/png;base64,{service_base64}"/>'
 
     top_base64 = image_to_base64("../images/TOP_RIGHT.png")
     top_img = f'<img class="logo-img" src="data:image/png;base64,{top_base64}"/>'
@@ -45,21 +47,19 @@ except FileNotFoundError:
 
 def functional_design(name, hotel, pax, time, date, company="at", service="a", flight=None):
     # Change logo depending on type.
-    # Simply toggle visibility for the id variation. .
+    # Simply toggle visibility for the id variation.
     with open("../style.css", "r") as fl:
         fl = fl.read()
-        if service == "d":
+        if service == "d":  # Used the comment to identify the exact line I want to replace.
             fl = fl.replace("flex;  /*collapse*/", "none;")
-
         if company == "st":
-            fl = fl.replace("hidden", "visible")  # Only case where this happens, that's why it works
+            fl = fl.replace("hidden", "visible")  # Only case where this happens, should use the same comment strategy
 
     styles = fl
-
     surname = ' '.join([part for part in name[1:]]) if len(name) > 1 else name[1]
 
     logo = logo_img if company == "at" else st_img
-    service_image = service_img if service == "a" else departure_img
+    service_image = arrival_img if service == "a" else departure_img
 
     design = f"""
         <!DOCTYPE html>
@@ -140,34 +140,35 @@ def functional_design(name, hotel, pax, time, date, company="at", service="a", f
     return design
 
 def create_slides(data, company, service):
-    slides = data
-    slides = slides.strip().split("\n")
+    slides = data.strip().split("\n")
 
     for slide in slides:
+
         slide = slide.split(",")
 
         name = slide[0].upper()
         time = slide[1].upper()
         # For we will keep checking the flights manually and introducing them here as hard coded values
         flight = ""
-        if service == "a":
+        if service[3:] == "arrivals":
             flight = slide[2]
             pax = slide[3]
-            hotel = slide[4]
+            hotel = slide[4].upper()
         else:
-            pax = slide[2].upper()
+            pax = "0"+slide[2] if int(slide[2]) < 10 else slide[2]
             hotel = slide[3].upper()
 
         date = (str(datetime.datetime.today() + timedelta(days=1))).split()[0]
-
         # date = str(datetime.datetime.today())
+
         # might also add logic to delete the current files in the directory
-        output_dir = f"{path}/OPERATIONS/{company.upper()+service.upper()}/{name.strip()} - {company.upper()}.pdf"
+        output_dir = f"{path}/OPERATIONS/{(company+service[0]).upper()}/{name.strip()} - {company.upper()}.pdf"
         HTML(
             string=functional_design(
                 name.strip().split(" "), hotel, pax, time, date, flight=flight, company=company.lower(), service=service.lower()), base_url="."
         ).write_pdf(output_dir)
 
+        colored_print(f"Slide for {name} done", "green")
 
+    colored_print("Done!", "green")
 
-# create_slides(None, "st", "a")

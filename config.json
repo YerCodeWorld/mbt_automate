@@ -21,5 +21,11 @@
       "write": "",
       "read": ""
     }
+  },
+
+  "flights": {
+    "defaultFile": "ATbookings.json",
+    "extractFile": "extracted.csv"
+
   }
 }

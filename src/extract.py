@@ -1,29 +1,13 @@
-"""
-from datetime import datetime
-import pytz
-
-def convert_time(utc_time):
-    utc_time = datetime.strptime(utc_time, "%Y-%m-%dT%H:%M:%SZ")
-    # Set as UTC timezone | whatever witchery this does
-    utc_time = utc_time.replace(tzinfo=pytz.UTC)
-    local_timezone = pytz.timezone("America/Santo_Domingo")
-    local_time = utc_time.astimezone(local_timezone)
-
-    # Return converted to 12h time system
-    return f"Local arrival time: {local_time.strftime("%I:%M %p")}"
-
-
-# 2025-04-18T15:20:00:00Z
-# 2025-04-18T11:30:00.000000Z
-# print(convert_time("2025-04-18T11:30:00Z"))
-"""
 
 import json
 import csv
 import os
 import datetime
+from utils import colored_print
+from datetime import timedelta
 from pathlib import Path
 
+TOMORROW = str(datetime.date.today() + timedelta(days=1))
 
 def determine_service_type(reservation):
     """
@@ -35,12 +19,12 @@ def determine_service_type(reservation):
     return_date = reservation["travel"].get("return")
 
     # Today's date (used to check if return date is today)
-    today = datetime.datetime.strptime("2025-04-18", "%Y-%m-%d").date()
+    tomorrow = datetime.datetime.strptime(TOMORROW, "%Y-%m-%d").date()
 
     # If return date exists and is today, it's a departure regardless of locations
     if return_date:
         return_datetime = datetime.datetime.strptime(return_date.split("T")[0], "%Y-%m-%d").date()
-        if return_datetime == today:
+        if return_datetime == tomorrow:
             return "Departure"
 
     # Otherwise, determine by locations
@@ -89,30 +73,32 @@ def process_json_to_csv(json_path, csv_path):
     desktop_path = os.path.join(Path.home(), "Desktop")
     output_path = os.path.join(desktop_path, csv_path)
 
-    # Define CSV headers
-    headers = ["Tipo", "Código", "Cliente", "Pickup", "Vuelo", "Vehiculo", "Pax", "Desde", "Hacia", "COMP"]
+    # Define CSV headers (Could be loaded from config file too)
+    headers = ["Tipo", "Código", "Cliente", "Hora", "Vuelo", "Vehiculo", "Pax", "Desde", "Hacia", "COMP"]
 
     # Write to CSV
     with open(output_path, 'w', encoding='utf-8', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers)
         writer.writeheader()
+        total_services = 0
 
         for reservation in data:
-            # Skip records that are not for the target date (April 18, 2025)
+            # Skip records that are not for the target date (tomorrow's)
             flight_arrival = reservation["travel"].get("flight_arrival", "")
-            if not flight_arrival or not flight_arrival.startswith("2025-04-18"):
+            if not flight_arrival or not flight_arrival.startswith(TOMORROW):
+                continue
+
+            # We don't need these services either
+            refunded: bool = float(reservation["price"]["refund_amount"]) > 0
+            if refunded:
                 continue
 
             service_type = determine_service_type(reservation)
+            # Remember to take the spaces
+            name = clean_name(reservation["passenger"]["name"]) + " " + clean_name(reservation["passenger"]["surname"])
 
-            passenger_name = clean_name(reservation["passenger"]["name"])
-            passenger_surname = clean_name(reservation["passenger"]["surname"])
-            name = passenger_name + passenger_surname
-
-            adults = reservation["travelers"]["adult"]
-            children = reservation["travelers"]["children"]
-            infants = reservation["travelers"]["infant"]
-            pax = int(adults) + int(children) + int(infants)
+            pax_indices = ["adult", "children", "infant"]
+            pax = sum([int(reservation["travelers"][ct]) for ct in pax_indices])
 
             # Prepare row data
             row = {
@@ -122,26 +108,28 @@ def process_json_to_csv(json_path, csv_path):
                 "Hora": flight_arrival,
                 "Vehiculo": reservation["segment"],
                 "Pax": pax,
-                "Desde": reservation["pickup_location"]["name"],
-                "Hasta": reservation["drop_of_location"]["name"],
-                "COMP": "AT"
+                "Desde": reservation["pickup_location"]["name"].split(",")[0],
+                "Hacia": reservation["drop_of_location"]["name"].split(",")[0],
+                "COMP": "AT"  # Will always be this
             }
 
             # Handle flight number and time based on service type
             if service_type == "Arrival":
-                row["flight_number"] = reservation["travel"]["flight_number"]
-                row["time"] = "NONE"  # For arrivals, time is set to NONE as requested
+                row["Vuelo"] = reservation["travel"]["flight_number"]
+                row["Hora"] = "..."  # For arrivals, time is set to NONE as requested
             else:  # Departure
-                row["flight_number"] = ""  # No flight number for departures
+                row["Vuelo"] = ""  # No flight number for departures
                 # For departures, use the arrival time or return time if it's today
-                if reservation["travel"].get("return") and "2025-04-18" in reservation["travel"]["return"]:
-                    row["time"] = convert_time_format(reservation["travel"]["return"])
+                if reservation["travel"].get("return") and TOMORROW in reservation["travel"]["return"]:
+                    row["Hora"] = convert_time_format(reservation["travel"]["return"])
                 else:
-                    row["time"] = convert_time_format(reservation["travel"]["flight_arrival"])
+                    row["Hora"] = convert_time_format(reservation["travel"]["flight_arrival"])
 
             writer.writerow(row)
+            total_services += 1
 
-    print(f"CSV file has been created at: {output_path}")
+    colored_print(f"CSV file has been created at: {output_path}", "green")
+    colored_print(f"We got a total of {total_services} services. Make sure this aligns with the amount shown in AirportTransfer Website", "yellow")
 
 
 if __name__ == "__main__":

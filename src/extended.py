@@ -3,30 +3,6 @@ Called extended as these are just part of the main core logic.
 Only that separated for better maintainability, and also because these are like
 helper functions for the actual process.
 """
-# USED IN STEP 1
-def get_columns(data: str):
-    """
-    The way I removed the header was splitting by new lines a returning the joint of the rest of indexes.
-    There's probably a better way to do that.
-    :param data:
-    :return: removed header
-    """
-    data = data.split("\n")
-    header = data[0].split(",")
-    # We also return the length of the splitted header to know how many commas are necessary to identify split points
-    return (len(header), header), "\n".join(data[1:])
-
-# USED IN STEP 2
-def get_company(data: [], company_index: int) -> (str, list[str]):
-    """
-    Only thing we are doing here is determining the company based on the information we get in the company colum.
-    We then return the data that we take advantage of the split call from
-    :param data:
-    :param company_index:
-    :return:
-    """
-    company_data: str = data.strip().split("\n")
-    return company_data[0].split(",")[company_index], company_data
 
 def remove_tildes():
     pass
@@ -50,13 +26,13 @@ def get_services(data: {}, valid_data):
                 col = col.lower().replace(edge_case, edge_cases[edge_case]).upper()
         return col
 
-    def separate_by_type(info, mode):
+    def separate_by_type(info, valid):
         l = []
         for i, col in enumerate(info):
-            if i in mode:
+            if i in valid:
                 # These are cases in which the name of the hotel must be something different than what is first written
                 # The hotel column is always the last in the mode
-                if i == mode[-1]:
+                if i == valid[-1]:
                     col = get_edge_cases(col)
                 l.append(col)
 
@@ -80,12 +56,14 @@ def get_services(data: {}, valid_data):
 # USED IN STEP TWO FROM MAIN FUNCTION
 def get_valid_indexes(header):
     # We will make these below be taken from the JSON config file
-    valid_a, valid_d = ["Cliente", "Pickup", "Vuelo", "Pax", "Hacia"], ["Cliente", "Pickup", "Pax", "Desde"]
+    valid_a = ["Cliente", "Pickup", "Vuelo", "Pax", "Hacia"]
+    valid_d = ["Cliente", "Pickup", "Pax", "Desde"]
 
     data = {
         "arrivals": [],
         "departures": [],
-        "company": int
+        "company": int,
+        "name": int
     }
 
     for i, colum in enumerate(header):
@@ -95,8 +73,12 @@ def get_valid_indexes(header):
         if colum in valid_a:
             data["arrivals"].append(i)
 
+        # Get the company index
         if colum.lower() == "comp":
             data["company"] = i
+
+        if colum.lower() == "nombre":
+            data["name"] = i
 
     return data
 

@@ -8,9 +8,11 @@ and just automate the blood out of that process too.
 import json
 import requests
 import datetime
+from utils import colored_print
 from datetime import timedelta
 
 def generate_at_bookings():
+    # today = datetime.date.today()
     tomorrow = datetime.date.today() + timedelta(days=1)
 
     # URL to get all bookings from a day, must be changed everyday
@@ -27,9 +29,11 @@ def generate_at_bookings():
 
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        print("Got AT's today's data!")
+        colored_print("Got AT's today's data!", "green")
 
-    with open("../ATbookings.json", "w", encoding="utf-8") as fl:
+    with open("ATbookings.json", "w", encoding="utf-8") as fl:
         data = response.json()
         json.dump(data, fl, indent=4)
 
+
+generate_at_bookings()

@@ -5,6 +5,7 @@ Uses AreoAPI for real-time accurate data..
 
 import requests
 import json
+from utils import colored_print
 from datetime import datetime, timedelta, UTC
 import pytz
 
@@ -44,7 +45,12 @@ def convert_flight_code(global_code: str):
         "AM": "AMX",  # Aeromexico
         "Y4": "VOI",  # Volaris
         "VB": "VIV",  # VivaAerobus
-        "American": "AA"
+        "American": "AA",
+        "United": "UA",
+        "XP": "VXP",
+        "LX": "SWR",
+        "LA": "LPE",
+        "H2": "LAN"
     }
     try:
         prefix = global_code.split(" ")[0]
@@ -97,19 +103,12 @@ def get_flight_data(flight_code: str, date: str):
     else:
         return "No data retrieved"
 
-# flights =  "B6869 AA2641".split(" ")
-flight = "JBU869"
-# data = get_flight_data("AV128", "tomorrow")
-#with open("puj.today.json", "r", encoding="utf-8") as fl:
-#    data = json.load(fl)
-
-def process_flight_data(data, flight):
+def process_flight_data(data):
     """
     Process flight data to find a flight where PUJ is the destination
 
     Args:
         data: The flight data response from the API
-        flight: The flight code/identifier
     """
     if not isinstance(data, dict) or "flights" not in data:
         print("Invalid data format or no flights found")
@@ -136,12 +135,21 @@ def process_flight_data(data, flight):
 
 def get_flight_time(code: str, date="tomorrow"):
     data = get_flight_data(convert_flight_code(code), date)
-    return process_flight_data(data, code)
+    return process_flight_data(data)
 
-def api(data):
-    flights = data
-    for flight in flights:
-        print(f"Got flight {flight}:", get_flight_time(flight))
-    print("Done my broda")
+def api(data, service_type):
 
-# api(["American 2337", ""])
+    if service_type[3:] == "departures":
+        return colored_print("Departures do not provide flights we need to check on.", "yellow")
+
+    for fl in data:
+
+        time = get_flight_time(fl)
+
+        if time is not None:
+            print(colored_print(f"Got flight {fl}: {time}", "green"))
+        else:
+            colored_print(f"Flight {fl} returned nothing:", "yellow")
+            colored_print("Make sure it is a PUJ flight or check the validity of the code.", "red")
+
+    colored_print("Process completed", "green")

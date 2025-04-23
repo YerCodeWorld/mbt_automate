@@ -3,7 +3,7 @@ from pypdf import PdfReader, PdfWriter
 # I could use the console purely on white but meh I like this better
 def colored_print(message: str, color):
     colors = {
-        "red": 30,
+        "red": 31,
         "green": 32,
         "yellow": 33,
         "blue": 34
@@ -31,9 +31,20 @@ def get_names(data: str) -> list[str]:
     """
     return [row.split(",")[0] for row in data.strip().split("\n")]
 
+def print_names(names):
+    for i, name in enumerate(names):
+        print(f"{i+1} - {name}")
+
 # USED WHEN FLIGHT COMMAND IS TYPED IN
 def get_flights(data: str):
-    return [row.split(",")[2] for row in data.strip().split("\n")]
+    return [row.split(",")[2] for row in data.split("\n")]
+
+def print_flights(flights, service_type):
+
+    if service_type[3:] == "departures":
+        return colored_print("Departures do not provide flights we need to check on.", "yellow")
+    for i, flight in enumerate(flights):
+        print(f"{i + 1} - {flight}")
 
 # USED WHEN WRITE COMMAND IS TYPED ON
 def write_to_directory(path: str, file: str, content: str, header: str):
